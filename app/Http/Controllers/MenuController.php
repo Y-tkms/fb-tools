@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Menu;
 use App\Models\MenuSection;
 use App\Models\MenuPreference;
@@ -57,7 +58,7 @@ class MenuController extends Controller
         $request->validate([
             'name' => 'required|min:1|max:100',
             'section' => '',
-            'price' => 'max:99999999999',
+            'price' => 'nullable|numeric|min:1|max:99999999999',
             'image' => 'mimes:jpg,jpeg,png,gif,heic|max:1048',
             'preference' => '',
             'description' => 'max:50000'
@@ -97,6 +98,10 @@ class MenuController extends Controller
         $all_sections = $this->menu_section->all();
         $all_preference = $this->preference->all();
 
+        if(Auth::user()->role != 'a' && Auth::user()->role != 'em' && Auth::user()->role != 'emr') {
+            return redirect()->route('menu.index');
+        }
+
         return view('menu.edit')
             ->with('menu', $menu)
             ->with('all_sections', $all_sections)
@@ -107,7 +112,7 @@ class MenuController extends Controller
         $request->validate([
             'name' => 'required|min:1|max:100',
             'section' => '',
-            'price' => 'max:99999999999',
+            'price' => 'nullable|numeric|min:1|max:99999999999',
             'image' => 'mimes:jpg,jpeg,png,gif,heic|max:1048',
             'preference' => '',
             'description' => 'max:50000'
@@ -147,5 +152,28 @@ class MenuController extends Controller
         $menu->save();
 
         return redirect()->route('menu.index');
+    }
+
+    public function activate($id) {
+        $menu = $this->menu->findOrFail($id);
+        $menu->status = 1;
+        $menu->save();
+
+        return redirect()->back();
+    }
+
+    public function showHidden() {
+        $all_menu = $this->menu->where('status', 0)->get();
+        $menu_no_section = $this->menu->where('status', 0)->where('section_id', null)->get();
+        $all_menu_section = $this->menu_section->all();
+
+        if(Auth::user()->role != 'a') {
+            return redirect()->route('menu.index');
+        }
+
+        return view('menu.hidden-menu')
+            ->with('all_menu', $all_menu)
+            ->with('menu_no_section', $menu_no_section)
+            ->with('all_menu_section', $all_menu_section);
     }
 }

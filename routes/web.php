@@ -21,7 +21,7 @@ use App\Http\Controllers\MenuController;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
-    // index
+    // menu index
     Route::get('/', [HomeController::class, 'index'])->name('index');
     // menu
     Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/menu/edit/{id}', [MenuController::class, 'edit'])->name('menu.edit');
     Route::patch('/menu/update/{id}', [MenuController::class, 'update'])->name('menu.update');
     Route::patch('/menu/hide/{id}', [MenuController::class, 'hideMenu'])->name('menu.hide');
+    Route::patch('/menu/activate/{id}', [MenuController::class, 'activate'])->name('menu.activate');
+    Route::get('/menu/hidden', [MenuController::class, 'showHidden'])->name('menu.hidden');
     // menu section & preference
     Route::get('/menu/section', [MenuSectionController::class, 'index'])->name('menu.section');
     Route::post('/menu/section/create', [MenuSectionController::class, 'create'])->name('menu.section.create');

@@ -57,6 +57,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{route('menu.index')}}">Menu</a>
                                         <a class="dropdown-item" href="{{route('menu.section')}}">Section & Preference</a>
+                                        <a class="dropdown-item" href="{{route('menu.hidden')}}">Inactive Menu List</a>
                                     </div>
                                 </li>
                             @else

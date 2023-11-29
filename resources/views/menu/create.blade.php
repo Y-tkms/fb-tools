@@ -25,7 +25,7 @@
                         <div class="col-4">
                             <label for="section" class="form-label">Section</label>
                             <select name="section" id="section" class="form-select">
-                                <option value="">Select Section</option>
+                                <option value="">None</option>
                                 @if(!empty($all_sections) && count($all_sections) > 0)
                                     @foreach($all_sections as $section)
                                         <option value="{{$section->id}}">{{$section->name}}</option>
@@ -40,7 +40,7 @@
                     <div class="row mb-3">
                         <div class="col-4">
                             <label for="price" class="form-label">Price</label>
-                            <input type="number" name="price" id="price" class="form-control" placeholder="Price" value="{{old('price')}}">
+                            <input type="number" name="price" id="price" class="form-control" placeholder="Price" value="{{old('price')}}" step="any">
                             @error('price')
                                 <p class="text-danger small">{{$message}}</p>
                             @enderror
@@ -55,7 +55,7 @@
                         <div class="col-4">
                             <label for="preference" class="form-label">Preference</label>
                             <select name="preference" id="preference" class="form-select">
-                                <option value="">Select Preference</option>
+                                <option value="">None</option>
                                 @if(!empty($all_preference) && count($all_preference) > 0)
                                     @foreach($all_preference as $preference)
                                         <option value="{{$preference->id}}">{{$preference->name}}</option>

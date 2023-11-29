@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\MenuSection;
 use App\Models\MenuPreference;
 
@@ -19,6 +20,10 @@ class MenuSectionController extends Controller
     public function index() {
         $all_menu_sections = $this->menu_section->all();
         $all_menu_preference = $this->menu_preference->all();
+
+        if(Auth::user()->role != 'a') {
+            return redirect()->route('menu.index');
+        }
 
         return view('menu.sections&preferences.sections')
             ->with('all_menu_sections', $all_menu_sections)
