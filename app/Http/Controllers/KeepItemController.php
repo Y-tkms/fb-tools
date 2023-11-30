@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Menu;
 use App\Models\KeepItem;
 
 class KeepItemController extends Controller
 {
     private $keep_item;
+    private $menu;
 
-    public function __construct(KeepItem $keep_item) {
+    public function __construct(Menu $menu, KeepItem $keep_item) {
         $this->keep_item = $keep_item;
+        $this->menu = $menu;
     }
 
     public function indexCal() {
@@ -138,5 +141,112 @@ class KeepItemController extends Controller
         $this->keep_item->destroy($id);
 
         return redirect()->route('other.calculator');
+    }
+
+    public function goOffline() {
+        $result = null;
+        $final = null;
+
+        return view('others.offline')
+            ->with('result', $result)
+            ->with('final', $final);
+    }
+
+    public function field(Request $request) {
+        $request->validate([
+            'number' => 'required|numeric|min:1',
+            'exclude' => 'nullable'
+        ]);
+        
+        $all_menus = $this->menu->whereNotNull('price')->get();
+        $result = $request->number;
+        $final = null;
+        $exclude = 0;
+
+        if($request->exclude) {
+            if(count($request->exclude) == 2) {
+                $exclude = 1;
+            } elseif($request->exclude == "tax") {
+                $exclude = 2;
+            } elseif($request->exclude == "svc") {
+                $exclude = 3;
+            }
+        }
+
+        session(['exclude' => $exclude]);
+
+        return view('others.offline')
+            ->with('all_menus', $all_menus)
+            ->with('exclude', $exclude)
+            ->with('result', $result)
+            ->with('final', $final);
+    }
+
+    public function calculateOrder(Request $request) {
+
+        $exclude = session('exclude');
+        $result = null;
+        $final = count($request->menu);
+        $menu = [];
+        $price = [];
+        $amount = [];
+        $total = 0;
+        $svc = 0;
+        $tax = 0;
+        $subtotal = 0;
+        $note = "";
+
+        for($i = 0; $i < $final; $i++) {
+            if($request->menu[$i] == "none") {
+                $menu[] = $request->name[$i];
+                $price[] = $request->price[$i];
+                $amount[] = $request->amount[$i];
+                $total += $request->price[$i] * $request->amount[$i];
+            } else {
+                $menu[] = $this->menu->where('id', $request->menu[$i])->value('name');
+                $price[] = $this->menu->where('id', $request->menu[$i])->value('price');
+                $amount[] = $request->amount[$i];
+                $total += $this->menu->where('id', $request->menu[$i])->value('price') * $request->amount[$i];
+            }
+        }
+
+        if($exclude == 0) {
+            // nomal
+            $tax = ($total / 110) * 10;
+            $svc = (($total - $tax) / 118) * 18;
+            $subtotal = $total - $svc - $tax;
+            $note = "TAX 10% and SVC 18%";
+        } elseif($exclude == 1) {
+            // no both
+            $tax = ($total / 110) * 10;
+            $svc = (($total - $tax) / 118) * 18;
+            $subtotal = $total - $svc - $tax;
+            $total = $subtotal;
+            $note = "NO TAX and SVC";
+        } elseif($exclude == 2) {
+            // no tax
+            $svc = (($total - (($total / 110) * 10)) / 118) * 18;
+            $subtotal = $total - $svc - (($total / 110) * 10);
+            $total = $svc + $subtotal;
+            $note = "SVC 18% (no Tax)";
+        } else {
+            // no svc
+            $subtotal = $total - ((($total - (($total / 110) * 10)) / 118) * 18) - (($total / 110) * 10);
+            $total = $subtotal * 1.1;
+            $tax = $subtotal * 0.1;
+            $note = "TAX 10% (no SVC)";
+        }
+
+        return view('others.offline')
+            ->with('result', $result)
+            ->with('final', $final)
+            ->with('menu', $menu)
+            ->with('amount', $amount)
+            ->with('price', $price)
+            ->with('total', $total)
+            ->with('svc', $svc)
+            ->with('tax', $tax)
+            ->with('subtotal', $subtotal)
+            ->with('note', $note);
     }
 }

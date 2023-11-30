@@ -47,4 +47,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/other/calculator/store', [KeepItemController::class, 'store'])->name('other.store');
     Route::delete('/other/calculator/destroy/{id}', [KeepItemController::class, 'destroy'])->name('other.destroy');
     // other offline
+    Route::get('/other/offline', [KeepItemController::class, 'goOffline'])->name('other.offline');
+    Route::post('/other/offline/field', [KeepItemController::class, 'field'])->name('other.field');
+    Route::post('/other/offline/calculate', [KeepItemController::class, 'calculateOrder'])->name('other.order');
 });

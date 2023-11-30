@@ -69,7 +69,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{route('other.calculator')}}">Price Calculator</a>
-                                    <a class="dropdown-item" href="#">for Offline</a>
+                                    <a class="dropdown-item" href="{{route('other.offline')}}">for Offline</a>
                                 </div>
                             </li>
                         @endauth

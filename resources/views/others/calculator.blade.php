@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header d-flex">
                     <h3>Price Calculator</h3>
-                    {{-- <a href="{{route('other.calculator')}}" class="btn btn-secondary ms-auto px-5">Refresh</a> --}}
+                    <a href="{{route('other.calculator')}}" class="btn btn-secondary ms-auto px-5">Refresh</a>
                 </div>
                 <div class="card-body">
                     <form action="{{route('other.calculate')}}" method="POST">
@@ -19,6 +19,21 @@
                                     <input type="radio" class="btn-check" name="type" id="cal" autocomplete="off" value="cal" checked>
                                     <label class="btn btn-outline-primary w-100" for="cal">Convert Price </label>
                                     <div class="mt-2 row">
+                                        <div class="col-3 text-end">
+                                            <span class="fw-bold">Convert</span>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="formula" id="add" value="add" checked>
+                                                <label class="form-check-label" for="add">Add</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="formula" id="remove" value="remove">
+                                                <label class="form-check-label" for="remove">Remove</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-3 text-end">
                                             <span class="fw-bold">SVC</span>
                                         </div>
@@ -53,21 +68,6 @@
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="tax" id="tax0" value="0">
                                                 <label class="form-check-label" for="tax0">None</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3 text-end">
-                                            <span class="fw-bold">Convert</span>
-                                        </div>
-                                        <div class="col-9">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="formula" id="add" value="add" checked>
-                                                <label class="form-check-label" for="add">Add</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="formula" id="remove" value="remove">
-                                                <label class="form-check-label" for="remove">Remove</label>
                                             </div>
                                         </div>
                                     </div>
@@ -182,10 +182,10 @@
                             @foreach($all_items as $item)
                                 <tr>
                                     <td>{{$item->name}}</td>
-                                    <td>{{round($item->price)}}</td>
-                                    <td>{{round($item->price - (($item->price / 110) * 10) - ((($item->price - (($item->price / 110) * 10)) / 118) * 18))}}</td>
-                                    <td>{{round(($item->price / 110) * 10)}}</td>
-                                    <td>{{round((($item->price - (($item->price / 110) * 10)) / 118) * 18)}}</td>
+                                    <td>¥{{number_format(round($item->price))}}</td>
+                                    <td>¥{{number_format(round($item->price - (($item->price / 110) * 10) - ((($item->price - (($item->price / 110) * 10)) / 118) * 18)))}}</td>
+                                    <td>¥{{number_format(round(($item->price / 110) * 10))}}</td>
+                                    <td>¥{{number_format(round((($item->price - (($item->price / 110) * 10)) / 118) * 18))}}</td>
                                     <td>
                                         <form action="{{route('other.destroy', $item->id)}}" method="POST" class="d-inline">
                                             @csrf
