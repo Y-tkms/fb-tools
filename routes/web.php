@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuSectionController;
 use App\Http\Controllers\MenuPreferenceController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\KeepItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\MenuController;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
-    // menu index
+    // index
     Route::get('/', [HomeController::class, 'index'])->name('index');
     // menu
     Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
@@ -40,4 +41,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('menu/{id}/{type}/edit', [MenuSectionController::class, 'edit'])->name('menu.section.edit');
     Route::patch('menu/{id}/{type}/update', [MenuSectionController::class, 'update'])->name('menu.section.update');
     Route::delete('menu/{id}/{type}/destroy', [MenuSectionController::class, 'destroy'])->name('menu.section.destroy');
+    // other
+    Route::get('/other/calculator', [KeepItemController::class, 'indexCal'])->name('other.calculator');
+    Route::post('/other/calculator/calculate', [KeepItemController::class, 'calculate'])->name('other.calculate');
+    Route::post('/other/calculator/store', [KeepItemController::class, 'store'])->name('other.store');
+    Route::delete('/other/calculator/destroy/{id}', [KeepItemController::class, 'destroy'])->name('other.destroy');
 });
