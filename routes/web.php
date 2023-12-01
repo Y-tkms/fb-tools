@@ -7,6 +7,7 @@ use App\Http\Controllers\MenuSectionController;
 use App\Http\Controllers\MenuPreferenceController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\KeepItemController;
+use App\Http\Controllers\RsvSectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,16 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
     // index
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    // reservation
+    // rsv setting
+    Route::get('/reservation/setting', [RsvSectionController::class, 'index'])->name('rsv.set.index');
+    // rsv setting section
+    Route::get('reservation/setting/section', [RsvSectionController::class, 'sectionIndex'])->name('rsv.set.sec.index');
+    Route::get('reservation/setting/section/edit/{id}', [RsvSectionController::class, 'edit'])->name('rsv.set.sec.edit');
+    Route::get('reservation/setting/section/delete/{id}', [RsvSectionController::class, 'delete'])->name('rsv.set.sec.delete');
+    Route::post('reservation/setting/section/store', [RsvSectionController::class, 'store'])->name('rsv.set.sec.store');
+    Route::patch('reservation/setting/section/update/{id}', [RsvSectionController::class, 'update'])->name('rsv.set.sec.update');
+    Route::patch('reservation/setting/section/deactivate/{id}', [RsvSectionController::class, 'deactivate'])->name('rsv.set.sec.deactivate');
     // menu
     Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
     Route::get('/menu/create', [MenuController::class, 'create'])->name('menu.create');

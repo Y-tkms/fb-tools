@@ -47,6 +47,9 @@
                                     <a class="dropdown-item" href="#">Course</a>
                                     <a class="dropdown-item" href="#">Christmas</a>
                                     <a class="dropdown-item" href="#">New Year</a>
+                                    @if(Auth::user()->role == 'a' || Auth::user()->role == 'emr' || Auth::user()->role == 'er')
+                                        <a class="dropdown-item" href="{{route('rsv.set.index')}}">Setting</a>
+                                    @endif
                                 </div>
                             </li>
                             @if(Auth::user()->role == 'a')

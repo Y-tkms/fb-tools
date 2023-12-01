@@ -56,7 +56,7 @@
                                         <div class="col-md-3 mb-2">
                                             <label for="menu" class="form-label">Menu</label>
                                             <select name="menu[]" id="menu" class="form-select">
-                                                <option value="none" class="none">Manual Entry</option>
+                                                <option value="none" class="text-danger">Manual Entry</option>
                                                 @if(count($all_menus) > 0)
                                                     @foreach($all_menus as $menu)
                                                         <option value="{{$menu->id}}">{{$menu->name}}</option>
