@@ -9,5 +9,11 @@ class RsvSection extends Model
 {
     use HasFactory;
 
+    public function times() {
+        return $this->hasMany(Time::class);
+    }
 
+    public function orderItems() {
+        return $this->hasMany(OrderItem::class);
+    }
 }

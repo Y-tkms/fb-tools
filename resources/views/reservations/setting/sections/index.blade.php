@@ -50,9 +50,6 @@
                                     <td>{{$section->max}}</td>
                                     <td>
                                         <a href="{{route('rsv.set.sec.edit', $section->id)}}" class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        @if(Auth::user()->role == 'a')
-                                            <a href="{{route('rsv.set.sec.delete', $section->id)}}" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can"></i></a>
-                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

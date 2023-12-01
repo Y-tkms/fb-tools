@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RsvSection;
+use Illuminate\Support\Facades\Auth;
 
 class RsvSectionController extends Controller
 {
@@ -14,11 +15,19 @@ class RsvSectionController extends Controller
     }
 
     public function index() {
+        if(Auth::user()->role == "em" || Auth::user()->role == "u") {
+            return redirect()->route('index');
+        }
+
         return view('reservations.setting.index');
     }
 
     public function sectionIndex() {
         $all_sections = $this->rsv_section->where('status', 1)->get();
+
+        if(Auth::user()->role == "em" || Auth::user()->role == "u") {
+            return redirect()->route('index');
+        }
 
         return view('reservations.setting.sections.index')->with('all_sections', $all_sections);
     }
@@ -51,20 +60,6 @@ class RsvSectionController extends Controller
         $section = $this->rsv_section->findOrFail($id);
         $section->name = $request->name;
         $section->max = $request->max;
-        $section->save();
-
-        return redirect()->route('rsv.set.sec.index');
-    }
-
-    public function delete($id) {
-        $section = $this->rsv_section->findOrFail($id);
-
-        return view('reservations.setting.sections.delete')->with('section', $section);
-    }
-
-    public function deactivate($id) {
-        $section = $this->rsv_section->findOrFail($id);
-        $section->status = 0;
         $section->save();
 
         return redirect()->route('rsv.set.sec.index');

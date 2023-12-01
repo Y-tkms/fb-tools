@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <div class="mb-2">
                             <label for="name" class="form-label">Section Name</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{old('name', $section->name)}}">
+                            <input type="text" name="name" id="name" class="form-control" value="{{old('name', $section->name)}}" readonly>
                             @error('name')
                                 <p class="text-danger small">{{$message}}</p>
                             @enderror
@@ -29,6 +29,9 @@
                                 <button type="submit" class="btn btn-warning w-100">Save Change</button>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer text-danger text-center">
+                        <p class="fw-bold mb-0">When you change this section, the related data will also be changed automatically</p>
                     </div>
                 </div>
             </form>
