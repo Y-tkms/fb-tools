@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-header">
                     <h5 class="m-0">Image</h5>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex">
                     <h4 class="m-0">Menu Details</h4>
@@ -43,7 +43,7 @@
                             <tbody class="table-group-divider">
                                 <tr>
                                     <td class="fw-bold">Name</td>
-                                    <td>
+                                    <td class="word-wrap">
                                         @if($menu->name)
                                             {{$menu->name}}
                                         @endif

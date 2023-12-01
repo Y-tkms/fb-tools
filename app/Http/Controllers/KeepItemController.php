@@ -27,7 +27,7 @@ class KeepItemController extends Controller
 
     public function calculate(Request $request) {
         $request->validate([
-            'price' => 'required|numeric|min:1'
+            'price' => 'required|numeric|min:1|max:99999999999'
         ]);
 
         $all_items = $this->keep_item->all();
@@ -126,12 +126,8 @@ class KeepItemController extends Controller
     }
 
     public function store(Request $request) {
-        $request->validate([
-            'name' => 'required|min:1|max:100'
-        ]);
-
         $this->keep_item->name = $request->name;
-        $this->keep_item->price = $request->price;
+        $this->keep_item->price = $request->keepprice;
         $this->keep_item->save();
 
         return redirect()->route('other.calculator');

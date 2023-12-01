@@ -4,11 +4,11 @@
 
 @section('content')
     <div class="row mb-3">
-        <div class="col-9">
+        <div class="col-xs-6">
             <h3 class="">- Menu -</h3>
         </div>
-        <div class="col-3">
-            <a href="{{route('menu.create')}}" class="btn btn-primary ms-auto w-100">Create Menu</a>
+        <div class="col-xs-6">
+            <a href="{{route('menu.create')}}" class="btn btn-primary ms-auto w-100 text-nowrap">Create Menu</a>
         </div>
     </div>
     @if(!empty($all_menu) && count($all_menu) > 0)
@@ -20,8 +20,8 @@
                         <div class="row mb-2">
                             @foreach($all_menu as $menu)
                                 @if($menu->section_id == $section->id && $menu->status == 1)
-                                    <div class="col-3 mb-3">
-                                        <a href="{{route('menu.show', $menu->id)}}" class="btn btn-outline-dark w-100 fw-bold">{{$menu->name}}</a>
+                                    <div class="col-sm-3 mb-3">
+                                        <a href="{{route('menu.show', $menu->id)}}" class="btn btn-outline-dark w-100 fw-bold text-truncate">{{$menu->name}}</a>
                                     </div>
                                 @endif
                             @endforeach

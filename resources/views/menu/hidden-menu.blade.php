@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-md-8">
             <h3 class="">- Inactive Menu -</h3>
             @if(!empty($all_menu) && count($all_menu) > 0)
                 @if(!empty($all_menu_section) && count($all_menu_section) > 0)
@@ -17,11 +17,11 @@
                                         @if($menu->section_id == $section->id)
                                             <li class="list-group-item border-dark">
                                                 <div class="row">
-                                                    <div class="col-10">
-                                                        <h3 class="mb-0 ms-3">{{$menu->name}}</h3>
+                                                    <div class="col-md-10 mb-2">
+                                                        <h6 class="mb-0 ms-3">{{$menu->name}}</h6>
                                                     </div>
-                                                    <div class="col-2">
-                                                        <form action="#" method="POST">
+                                                    <div class="col-md-2">
+                                                        <form action="{{route('menu.activate', $menu->id)}}" method="POST">
                                                             @csrf
                                                             @method('PATCH')
                                                             <button type="submit" class="btn btn-outline-secondary w-100">Activate</button>
@@ -44,10 +44,10 @@
                         @foreach($menu_no_section as $menu)
                             <li class="list-group-item border-dark">
                                 <div class="row">
-                                    <div class="col-10">
-                                        <h3 class="mb-0 ms-3">{{$menu->name}}</h3>
+                                    <div class="col-md-10 mb-2">
+                                        <h6 class="mb-0 ms-3">{{$menu->name}}</h6>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <form action="{{route('menu.activate', $menu->id)}}" method="POST">
                                             @csrf
                                             @method('PATCH')

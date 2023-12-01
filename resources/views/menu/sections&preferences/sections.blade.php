@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-md-6 mb-3">
             <div class="card mt-3">
                 <div class="card-header">
                     <h3 class="m-0">Create Section</h3>
@@ -13,14 +13,14 @@
                     <form action="{{route('menu.section.create')}}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-9">
+                            <div class="col-md-9 mb-2">
                                 <label for="name" class="form-label">Section Name</label>
                                 <input type="text" class="form-control" name="name" id="name" placeholder="Section Name" value="{{old('name')}}">
                                 @error('name')
                                     <p class="text-danger small">{{$message}}</p>
                                 @enderror
                             </div>
-                            <div class="col-3 mt-auto">
+                            <div class="col-md-3 mt-auto mb-2">
                                 <button type="submit" class="btn btn-primary w-100">
                                     <i class="fa-solid fa-check"></i> Save
                                 </button>
@@ -64,7 +64,7 @@
                 </div>
             @endif
         </div>
-        <div class="col-6">
+        <div class="col-md-6">
             <div class="card mt-3">
                 <div class="card-header">
                     <h3 class="m-0">Create Preference</h3>
@@ -73,14 +73,14 @@
                     <form action="{{route('manu.preference.create')}}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-9">
+                            <div class="col-md-9 mb-2">
                                 <label for="name" class="form-label">Preference</label>
                                 <input type="text" class="form-control" name="preference" id="preference" placeholder="Preference" value="{{old('preference')}}">
                                 @error('preference')
                                     <p class="text-danger small">{{$message}}</p>
                                 @enderror
                             </div>
-                            <div class="col-3 mt-auto">
+                            <div class="col-md-3 mt-auto mb-2">
                                 <button type="submit" class="btn btn-primary w-100">
                                     <i class="fa-solid fa-check"></i> Save
                                 </button>

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex">
                     <h3>Price Calculator</h3>
@@ -19,10 +19,10 @@
                                     <input type="radio" class="btn-check" name="type" id="cal" autocomplete="off" value="cal" checked>
                                     <label class="btn btn-outline-primary w-100" for="cal">Convert Price </label>
                                     <div class="mt-2 row">
-                                        <div class="col-3 text-end">
+                                        <div class="col-md-3">
                                             <span class="fw-bold">Convert</span>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-md-9">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="formula" id="add" value="add" checked>
                                                 <label class="form-check-label" for="add">Add</label>
@@ -34,10 +34,10 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-3 text-end">
+                                        <div class="col-md-3">
                                             <span class="fw-bold">SVC</span>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-md-9">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="svc" id="svc18" value="18" checked>
                                                 <label class="form-check-label" for="svc18">18%</label>
@@ -53,10 +53,10 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-3 text-end">
+                                        <div class="col-md-3">
                                             <span class="fw-bold">TAX</span>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-md-9">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="tax" id="tax10" value="10" checked>
                                                 <label class="form-check-label" for="tax10">10%</label>
@@ -79,10 +79,10 @@
                                         <i class="text-danger">*Tax will be 10%</i>
                                     </div>
                                     <div class="mt-2 row">
-                                        <div class="col-2 text-end">
+                                        <div class="col-md-2">
                                             <span class="fw-bold">SVC</span>
                                         </div>
-                                        <div class="col-10">
+                                        <div class="col-md-10">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="way" id="to18" value="18" checked>
                                                 <label class="form-check-label" for="to18">16% => 18%</label>
@@ -99,15 +99,15 @@
                         <div class="mt-3">
                             <label for="price" class="form-label">Price</label>
                             <div class="row">
-                                <div class="col-9">
+                                <div class="col-md-9 mb-2">
                                     <input type="number" name="price" id="price" class="form-control" placeholder="Enter price here" value="{{old('price')}}" autofocus>
+                                    @error('price')
+                                        <p class="text-danger small">{{$message}}</p>
+                                    @enderror
                                 </div>
-                                <div class="col-3">
+                                <div class="col-md-3">
                                     <button type="submit" class="btn btn-primary w-100">Calculate</button>
                                 </div>
-                                @error('price')
-                                    <p class="text-warning small">{{$message}}</p>
-                                @enderror
                             </div>
                         </div>
                     </form>
@@ -133,13 +133,13 @@
                         </div>
                         <div class="row text-center">
                             <div class="col-4">
-                                <p class="text-muted mb-0">Input Price: ¥{{number_format($input)}}</p>
+                                <p class="text-muted mb-0">Input Price: <span class="fw-bold">¥{{number_format($input)}}</span></p>
                             </div>
                             <div class="col-4">
-                                <p class="text-muted mb-0">TAX: ¥{{number_format($tax)}} ({{$pertax}})</p>
+                                <p class="text-muted mb-0">TAX({{$pertax}}): <span class="fw-bold">¥{{number_format($tax)}}</span></p>
                             </div>
                             <div class="col-4">
-                                <p class="text-muted mb-0">SVC: ¥{{number_format($svc)}} ({{$persvc}})</p>
+                                <p class="text-muted mb-0">SVC({{$persvc}}): <span class="fw-bold">¥{{number_format($svc)}}</span></p>
                             </div>
                         </div>
                         @if($pertax == "10%" && $persvc == "18%")
@@ -148,11 +148,11 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col">
-                                            <input type="text" name="name" class="form-control border-dark" placeholder="Enter item name" value="{{old('name')}}">
+                                            <input type="text" name="name" class="form-control border-dark" placeholder="Enter item name" value="{{old('name')}}" required maxlength="100">
                                             @if($status == "add")
-                                                <input type="number" class="form-control mt-2 border-dark" name="price" value="{{$total}}" readonly>
+                                                <input type="number" class="form-control mt-2 border-dark" name="keepprice" value="{{$total}}" readonly>
                                             @else
-                                                <input type="number" class="form-control mt-2 border-dark" name="price" value="{{$initial}}" readonly>
+                                                <input type="number" class="form-control mt-2 border-dark" name="keepprice" value="{{$initial}}" readonly>
                                             @endif
                                         </div>
                                         <div class="col">
@@ -170,11 +170,11 @@
                     <table class="table table-striped table-hover align-middle text-center">
                         <thead class="table-dark">
                             <tr>
-                                <th>Name :</th>
-                                <th>Total Price =</th>
-                                <th>Input Price +</th>
-                                <th>SVC +</th>
-                                <th>TAX</th>
+                                <th class="text-nowrap">Name :</th>
+                                <th class="text-nowrap">Total Price =</th>
+                                <th class="text-nowrap">Input Price +</th>
+                                <th class="text-nowrap">SVC +</th>
+                                <th class="text-nowrap">TAX</th>
                                 <th></th>
                             </tr>
                         </thead>

@@ -7,7 +7,7 @@
             </div>
         <div class="modal-body">
             <p>Section Name</p>
-            <h5 class="mt-3">{{$menu_section->name}}</h5>
+            <h5 class="mt-3 text-break">{{$menu_section->name}}</h5>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>

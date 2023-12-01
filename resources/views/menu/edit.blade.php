@@ -7,7 +7,7 @@
         @csrf
         @method('PATCH')
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-4 mb-3">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="m-0">Image</h5>
@@ -27,21 +27,21 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="m-0">Edit Menu</h4>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
-                            <div class="col-8">
+                            <div class="col-md-8">
                                 <label for="name" class="form-label">Name <span class="text-danger">* Required</span></label>
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Name" value="{{old('name', $menu->name)}}">
                                 @error('name')
                                     <p class="text-danger small">{{$message}}</p>
                                 @enderror
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <label for="section" class="form-label">Section</label>
                                 <select name="section" id="section" class="form-select">
                                     <option value="">Select Section</option>
@@ -61,14 +61,14 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="price" class="form-label">Price</label>
                                 <input type="number" name="price" id="price" class="form-control" placeholder="Price" value="{{old('price', $menu->price)}}">
                                 @error('price')
                                     <p class="text-danger small">{{$message}}</p>
                                 @enderror
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label for="preference" class="form-label">Preference</label>
                                 <select name="preference" id="preference" class="form-select">
                                     <option value="">Select Preference</option>

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card mt-3">
                 <div class="card-header">
                     <h3 class="m-0">Create Section</h3>
@@ -14,15 +14,15 @@
                         @csrf
                         @method('PATCH')
                         <div class="row">
-                            <div class="col-9">
+                            <div class="col-md-9">
                                 <label for="name" class="form-label">Section Name</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Section Name" value="{{old('name', $data->name)}}">
+                                <input type="text" class="form-control mb-2" name="name" id="name" placeholder="Section Name" value="{{old('name', $data->name)}}">
                                 @error('name')
                                     <p class="text-danger small">{{$message}}</p>
                                 @enderror
                             </div>
-                            <div class="col-3 mt-auto">
-                                <button type="submit" class="btn btn-primary w-100">
+                            <div class="col-md-3 mt-auto">
+                                <button type="submit" class="btn btn-primary w-100 mb-2">
                                     <i class="fa-solid fa-check"></i> Save Change
                                 </button>
                             </div>
