@@ -18,9 +18,11 @@ class TimeController extends Controller
     }
 
     public function index() {
+        $dec_section = $this->rsv_section->where('name', '12/31')->first();
+        $jan_section = $this->rsv_section->where('name', '1/1')->first();
         $sections = $this->rsv_section->where('name', '1/1')->orWhere('name', '12/31')->get();
-        $dec = $this->time->where('section_id', 6)->orderBy('time')->get();
-        $jan = $this->time->where('section_id', 5)->orderBy('time')->get();
+        $dec = $this->time->where('rsv_section_id', $dec_section->id)->orderBy('time')->get();
+        $jan = $this->time->where('rsv_section_id', $jan_section->id)->orderBy('time')->get();
 
         if(Auth::user()->role != "a") {
             return redirect()->route('index');

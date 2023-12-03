@@ -12,4 +12,8 @@ class Time extends Model
     public function rsvSection() {
         return $this->belongsTo(RsvSection::class);
     }
+
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
+    }
 }

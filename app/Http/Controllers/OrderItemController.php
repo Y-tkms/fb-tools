@@ -20,11 +20,7 @@ class OrderItemController extends Controller
 
     public function index() {
         $items = $this->order_item->all();
-        $sections = $this->rsv_section
-            ->where('name', 'New Year')
-            ->orWhere('name', 'Christmas')
-            ->orWhere('name', 'Course')
-            ->get();
+        $sections = $this->rsv_section->all();
 
         if(Auth::user()->role != "a") {
             return redirect()->route('index');

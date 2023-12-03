@@ -42,13 +42,13 @@
                                     Reservation
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Regular</a>
-                                    <a class="dropdown-item" href="#">Arrengement</a>
-                                    <a class="dropdown-item" href="#">Course</a>
-                                    <a class="dropdown-item" href="#">Christmas</a>
-                                    <a class="dropdown-item" href="#">New Year</a>
+                                    <a class="dropdown-item" href="{{route('rsv.regular.index')}}">Regular</a>
+                                    <a class="dropdown-item" href="{{route('rsv.arrangement.index')}}">Arrengement</a>
+                                    <a class="dropdown-item" href="{{route('rsv.course.index')}}">Course</a>
+                                    <a class="dropdown-item" href="{{route('rsv.xmas.index')}}">Christmas</a>
+                                    <a class="dropdown-item" href="{{route('rsv.newyear.index')}}">New Year</a>
                                     @if(Auth::user()->role == 'a' || Auth::user()->role == 'emr' || Auth::user()->role == 'er')
-                                        <a class="dropdown-item" href="{{route('rsv.set.index')}}">Setting</a>
+                                        <a class="dropdown-item text-danger" href="{{route('rsv.set.index')}}">Setting</a>
                                     @endif
                                 </div>
                             </li>
@@ -60,7 +60,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{route('menu.index')}}">Menu</a>
                                         <a class="dropdown-item" href="{{route('menu.section')}}">Section & Preference</a>
-                                        <a class="dropdown-item" href="{{route('menu.hidden')}}">Inactive Menu List</a>
+                                        <a class="dropdown-item text-danger" href="{{route('menu.hidden')}}">Inactive Menu List</a>
                                     </div>
                                 </li>
                             @else
@@ -89,7 +89,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     @if(Auth::user()->role == "a")
-                                        <a class="dropdown-item" href="#">Admin</a>
+                                        <a class="dropdown-item text-danger" href="#">Admin</a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

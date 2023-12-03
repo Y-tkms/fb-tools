@@ -4,10 +4,10 @@
 
 @section('content')
     <div class="row mb-3">
-        <div class="col-xs-6">
+        <div class="col-md-6">
             <h3 class="">- Menu -</h3>
         </div>
-        <div class="col-xs-6">
+        <div class="col-md-6">
             <a href="{{route('menu.create')}}" class="btn btn-primary ms-auto w-100 text-nowrap">Create Menu</a>
         </div>
     </div>

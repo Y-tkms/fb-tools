@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArrangementController;
 use App\Http\Controllers\ArrItemController;
 use App\Http\Controllers\DateController;
 use App\Http\Controllers\TimeController;
@@ -10,8 +11,11 @@ use App\Http\Controllers\MenuSectionController;
 use App\Http\Controllers\MenuPreferenceController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\KeepItemController;
+use App\Http\Controllers\KidController;
 use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RsvSectionController;
+use App\Models\Arrangement;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +33,72 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
     // index
     Route::get('/', [HomeController::class, 'index'])->name('index');
-    // reservation
+    // reservattion regular
+    Route::get('/reservation/regular', [ReservationController::class, 'indexRegular'])->name('rsv.regular.index');
+    Route::get('/reservation/regular/create', [ReservationController::class, 'createRegular'])->name('rsv.regular.create');
+    Route::get('/reservation/regular/edit/{id}/{type}', [ReservationController::class, 'editRegular'])->name('rsv.regular.edit');
+    Route::get('/reservation/regular/delete/{id}/{type}', [ReservationController::class, 'deleteRegular'])->name('rsv.regular.delete');
+    Route::get('/reservation/regular/history', [ReservationController::class, 'historyRegular'])->name('rsv.regular.history');
+    Route::get('/reservation/regular/other', [ReservationController::class, 'otherRegular'])->name('rsv.regular.other');
+    Route::post('/reservation/regular/store', [ReservationController::class, 'storeRegular'])->name('rsv.regular.store');
+    Route::patch('/reservation/regular/complete/{id}', [ReservationController::class, 'completeRegular'])->name('rsv.regular.complete');
+    Route::patch('/reservation/regular/return/{id}', [ReservationController::class, 'returnRegular'])->name('rsv.regular.return');
+    Route::patch('/reservation/regular/update/{id}/{type}', [ReservationController::class, 'updateRegular'])->name('rsv.regular.update');
+    Route::patch('/reservation/regular/deactivate/{id}/{type}', [ReservationController::class, 'deactivateRegular'])->name('rsv.regular.deactivate');
+    // reservattion arrengement
+    Route::get('/reservation/arrengement', [ReservationController::class, 'indexArr'])->name('rsv.arrangement.index');
+    Route::get('/reservation/arrengement/create', [ReservationController::class, 'createArr'])->name('rsv.arrangement.create');
+    Route::get('/reservation/arrengement/history', [ReservationController::class, 'historyArr'])->name('rsv.arrangement.history');
+    Route::get('/reservation/arrengement/edit/{id}', [ReservationController::class, 'editArr'])->name('rsv.arrangement.edit');
+    Route::get('/reservation/arrengement/delete/{id}', [ReservationController::class, 'deleteArr'])->name('rsv.arrangement.delete');
+    Route::get('/reservation/arrengement/show/{id}', [ReservationController::class, 'showArr'])->name('rsv.arrangement.show');
+    Route::post('/reservation/arrengement/store', [ReservationController::class, 'storeArr'])->name('rsv.arrangement.store');
+    Route::get('/reservation/arrengement/item/edit/{id}', [ArrangementController::class, 'edit'])->name('rsv.arrangement.item.edit');
+    Route::post('/reservation/arrengement/add/{id}', [ArrangementController::class, 'add'])->name('rsv.arrangement.add');
+    Route::patch('/reservation/arrengement/update/{id}', [ReservationController::class, 'updateArr'])->name('rsv.arrangement.update');
+    Route::patch('/reservation/arrengement/item/update/{id}', [ArrangementController::class, 'update'])->name('rsv.arrangement.item.update');
+    Route::patch('/reservation/arrengement/deactivate/{id}', [ReservationController::class, 'deactivateArr'])->name('rsv.arrangement.deactivate');
+    Route::delete('/reservation/arrengement/destroy/{id}', [ArrangementController::class, 'destroy'])->name('rsv.arrangement.destroy');
+    // reservattion course
+    Route::get('/reservation/course', [ReservationController::class, 'indexCourse'])->name('rsv.course.index');
+    Route::get('/reservation/course/create', [ReservationController::class, 'createCourse'])->name('rsv.course.create');
+    Route::get('/reservation/course/history', [ReservationController::class, 'historyCourse'])->name('rsv.course.history');
+    Route::get('/reservation/course/edit/{id}', [ReservationController::class, 'editCourse'])->name('rsv.course.edit');
+    Route::get('/reservation/course/delete/{id}', [ReservationController::class, 'deleteCourse'])->name('rsv.course.delete');
+    Route::post('/reservation/course/store', [ReservationController::class, 'storeCourse'])->name('rsv.course.store');
+    Route::patch('reservation/course/update/{id}', [ReservationController::class, 'updateCourse'])->name('rsv.course.update');
+    Route::patch('reservation/course/deactivate/{id}', [ReservationController::class, 'deactivateCourse'])->name('rsv.course.deactivate');
+    // reservattion christmas
+    Route::get('/reservation/christmas', [ReservationController::class, 'indexXmas'])->name('rsv.xmas.index');
+    Route::get('/reservation/christmas/history', [ReservationController::class, 'historyXmas'])->name('rsv.xmas.history');
+    Route::get('/reservation/christmas/create', [ReservationController::class, 'createXmas'])->name('rsv.xmas.create');
+    Route::get('/reservation/christmas/edit/{id}', [ReservationController::class, 'editXmas'])->name('rsv.xmas.edit');
+    Route::get('/reservation/christmas/delete/{id}', [ReservationController::class, 'deleteXmas'])->name('rsv.xmas.delete');
+    Route::get('/reservation/christmas/child/show/{id}', [ReservationController::class, 'showKidsXmas'])->name('rsv.xmas.show');
+    Route::get('/reservation/christmas/child/edit/{id}', [KidController::class, 'editXmas'])->name('rsv.xmas.kid.edit');
+    Route::post('/reservation/christmas/store', [ReservationController::class, 'storeXmas'])->name('rsv.xmas.store');
+    Route::post('/reservation/christmas/child/add/{id}', [KidController::class, 'addXmas'])->name('rsv.xmas.add');
+    Route::patch('/reservation/christmas/deactivate/{id}', [ReservationController::class, 'deactivateXmas'])->name('rsv.xmas.deactivate');
+    Route::patch('/reservation/christmas/update/{id}', [ReservationController::class, 'updateXmas'])->name('rsv.xmas.update');
+    Route::patch('/reservation/christmas/child/update/{id}', [KidController::class, 'updateXmas'])->name('rsv.xmas.kid.update');
+    Route::delete('/reservation/christmas/child/destroy/{id}', [KidController::class, 'destroyXmas'])->name('rsv.xmas.kid.destroy');
+    // reservattion new year
+    Route::get('/reservation/new-year', [ReservationController::class, 'indexNewYear'])->name('rsv.newyear.index');
+    Route::get('/reservation/new-year/history/{type}', [ReservationController::class, 'historyNewYear'])->name('rsv.newyear.history');
+    Route::get('/reservation/new-year/show/{type}', [ReservationController::class, 'showNewYear'])->name('rsv.newyear.show');
+    Route::get('/reservation/new-year/all-delete/{type}', [ReservationController::class, 'allDeleteNewYear'])->name('rsv.newyear.alldelete');
+    Route::get('/reservation/new-year/create/{type}', [ReservationController::class, 'createNewYear'])->name('rsv.newyear.create');
+    Route::get('/reservation/new-year/edit/{id}/{type}', [ReservationController::class, 'editNewYear'])->name('rsv.newyear.edit');
+    Route::get('/reservation/new-year/child/{id}/{type}', [ReservationController::class, 'showKidsNewYear'])->name('rsv.newyear.kid.show');
+    Route::get('/reservation/new-year/child/edit/{id}/{type}', [KidController::class, 'editNewYear'])->name('rsv.newyear.kid.edit');
+    Route::post('/reservation/new-year/store/{type}', [ReservationController::class, 'storeNewYear'])->name('rsv.newyear.store');
+    Route::post('/reservation/new-year/child/add/{id}', [KidController::class, 'addNewYear'])->name('rsv.newyear.kid.add');
+    Route::patch('/reservation/new-year/update/{id}/{type}', [ReservationController::class, 'updateNewYear'])->name('rsv.newyear.update');
+    Route::patch('/reservation/new-year/reset/{type}', [ReservationController::class, 'resetNewYear'])->name('rsv.newyear.reset');
+    Route::get('/reservation/new-year/delete/{id}/{type}', [ReservationController::class, 'deleteNewYear'])->name('rsv.newyear.delete');
+    Route::patch('/reservation/new-year/deactivate/{id}/{type}', [ReservationController::class, 'deactivateNewYear'])->name('rsv.newyear.deactivate');
+    Route::patch('/reservation/new-year/child/update/{id}/{type}', [KidController::class, 'updateNewYear'])->name('rsv.newyear.kid.update');
+    Route::delete('/reservation/new-year/child/destroy/{id}/{type}', [KidController::class, 'destroyNewYear'])->name('rsv.newyear.kid.destroy');
     // rsv setting
     Route::get('/reservation/setting', [RsvSectionController::class, 'index'])->name('rsv.set.index');
     // rsv setting section

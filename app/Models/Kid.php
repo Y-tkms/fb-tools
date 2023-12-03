@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Date extends Model
+class Kid extends Model
 {
     use HasFactory;
 
-    public function reservations() {
-        return $this->hasMany(Reservation::class);
+    public function reservation() {
+        return $this->belongsTo(Reservation::class);
     }
 }
