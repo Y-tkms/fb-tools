@@ -32,7 +32,7 @@ class ArrangementController extends Controller
             return redirect()->route('rsv.arrangement.index');
         }
 
-        return view('reservations\arrangements\items\edit')
+        return view('reservations.arrangements.items.edit')
             ->with('arrangement', $arrangement)
             ->with('items', $items);
     }

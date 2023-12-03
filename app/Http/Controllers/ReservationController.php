@@ -45,7 +45,7 @@ class ReservationController extends Controller
         $today = Carbon::now()->toDateString();
         $reservations = $this->reservation->where('other_date', $today)->where('rsv_section_id', $section->id)->where('status', 1)->orderBy('other_time')->get();
 
-        return view('reservations\arrangements\index')
+        return view('reservations.arrangements.index')
             ->with('today', $today)
             ->with('reservations', $reservations);
     }
@@ -55,7 +55,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.arrangement.index');
         }
 
-        return view('reservations\arrangements\create');
+        return view('reservations.arrangements.create');
     }
     
     public function storeArr(Request $request) {
@@ -100,7 +100,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.arrangement.index');
         }
 
-        return view('reservations\arrangements\edit')->with('reservation', $reservation);
+        return view('reservations.arrangements.edit')->with('reservation', $reservation);
     }
 
     public function updateArr(Request $request, $id) {
@@ -138,7 +138,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.arrangement.index');
         }
 
-        return view('reservations\arrangements\delete')->with('reservation', $reservation);
+        return view('reservations.arrangements.delete')->with('reservation', $reservation);
     }
 
     public function deactivateArr($id) {
@@ -154,7 +154,7 @@ class ReservationController extends Controller
         $items = $this->arrangement->where('reservation_id', $reservation->id)->get();
         $id = $reservation->id;
 
-        return view('reservations\arrangements\items\show')
+        return view('reservations.arrangements.items.show')
             ->with('items', $items)
             ->with('id', $id);
     }
@@ -163,7 +163,7 @@ class ReservationController extends Controller
         $section = $this->rsv_section->where('name', 'Arrangement')->first();
         $reservations = $this->reservation->where('other_date', '<', Carbon::today())->where('rsv_section_id', $section->id)->where('status', 1)->orderBy('other_date', 'desc')->get();
 
-        return view('reservations\arrangements\history')->with('reservations', $reservations);
+        return view('reservations.arrangements.history')->with('reservations', $reservations);
     }
 
     //regular
@@ -173,7 +173,7 @@ class ReservationController extends Controller
         $reservations = $this->reservation->where('other_date', $today)->where('rsv_section_id', $section->id)->where('status', 1)->orderBy('other_time')->get();
         $complete = $this->reservation->where('other_date', $today)->where('rsv_section_id', $section->id)->where('status', 2)->orderBy('other_time')->get();
 
-        return view('reservations\regular\index')
+        return view('reservations.regular.index')
             ->with('today', $today)
             ->with('reservations', $reservations)
             ->with('complete', $complete);
@@ -184,7 +184,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.regular.index');
         }
 
-        return view('reservations\regular\create');
+        return view('reservations.regular.create');
     }
 
     public function storeRegular(Request $request) {
@@ -240,7 +240,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.regular.index');
         }
 
-        return view('reservations\regular\edit')
+        return view('reservations.regular.edit')
             ->with('reservation', $reservation)
             ->with('type', $type);
     }
@@ -276,7 +276,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.regular.index');
         }
 
-        return view('reservations\regular\delete')
+        return view('reservations.regular.delete')
             ->with('reservation', $reservation)
             ->with('type', $type);
     }
@@ -297,7 +297,7 @@ class ReservationController extends Controller
         $section = $this->rsv_section->where('name', 'Regular')->first();
         $reservations = $this->reservation->where('other_date', '<', Carbon::today())->where('rsv_section_id', $section->id)->where('status', 1)->orderBy('other_date', 'desc')->get();
 
-        return view('reservations\regular\history')->with('reservations', $reservations);
+        return view('reservations.regular.history')->with('reservations', $reservations);
     }
 
     public function otherRegular() {
@@ -305,7 +305,7 @@ class ReservationController extends Controller
         $reservations = $this->reservation->where('rsv_section_id', $section->id)->whereDate('other_date', '>', Carbon::today())->where('status', 1)->orderBy('other_time')->get();
         $type = 'other';
 
-        return view('reservations\regular\other')
+        return view('reservations.regular.other')
             ->with('reservations', $reservations)
             ->with('type', $type);
     }
@@ -316,7 +316,7 @@ class ReservationController extends Controller
         $today = Carbon::now('Asia/Tokyo');
         $reservations = $this->reservation->where('rsv_section_id', $section->id)->whereDate('other_date', '>=', Carbon::today('Asia/Tokyo'))->where('status', 1)->orderBy('other_time')->get();
 
-        return view('reservations\course\index')
+        return view('reservations.course.index')
             ->with('today', $today)
             ->with('reservations', $reservations);
     }
@@ -328,7 +328,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.course.index');
         }
 
-        return view('reservations\course\create')->with('menus', $menus);
+        return view('reservations.course.create')->with('menus', $menus);
     }
 
     public function storeCourse(Request $request) {
@@ -370,7 +370,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.regular.index');
         }
 
-        return view('reservations\course\edit')
+        return view('reservations.course.edit')
             ->with('menus', $menus)
             ->with('reservation', $reservation);
     }
@@ -413,7 +413,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.christmas.index');
         }
 
-        return view('reservations\course\delete')
+        return view('reservations.course.delete')
             ->with('reservation', $reservation);
     }
 
@@ -429,7 +429,7 @@ class ReservationController extends Controller
         $section = $this->rsv_section->where('name', 'Course')->first();
         $reservations = $this->reservation->where('other_date', '<', Carbon::today())->where('rsv_section_id', $section->id)->where('status', 1)->orderBy('other_date', 'desc')->get();
 
-        return view('reservations\course\history')->with('reservations', $reservations);
+        return view('reservations.course.history')->with('reservations', $reservations);
     }
     
     // christmas
@@ -439,7 +439,7 @@ class ReservationController extends Controller
         $date = $this->date->whereYear('date', $year)->orderBy('date')->get();
         $reservations = $this->reservation->where('rsv_section_id', $section->id)->where('status', 1)->orderBy('other_time')->get();
         
-        return view('reservations\christmas\index')
+        return view('reservations.christmas.index')
             ->with('date', $date)
             ->with('reservations', $reservations);
     }
@@ -452,7 +452,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.christmas.index');
         }
 
-        return view('reservations\christmas\create')->with('date', $date);
+        return view('reservations.christmas.create')->with('date', $date);
     }
 
     public function storeXmas(Request $request) {
@@ -508,7 +508,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.christmas.index');
         }
 
-        return view('reservations\christmas\edit')
+        return view('reservations.christmas.edit')
             ->with('date', $date)
             ->with('reservation', $reservation);
     }
@@ -553,7 +553,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.christmas.index');
         }
 
-        return view('reservations\christmas\delete')
+        return view('reservations.christmas.delete')
             ->with('reservation', $reservation);
     }
 
@@ -569,7 +569,7 @@ class ReservationController extends Controller
         $section = $this->rsv_section->where('name', 'Christmas')->first();
         $reservations = $this->reservation->where('rsv_section_id', $section->id)->where('status', 1)->latest()->get();
 
-        return view('reservations\christmas\history')
+        return view('reservations.christmas.history')
             ->with('reservations', $reservations);
     }
 
@@ -578,7 +578,7 @@ class ReservationController extends Controller
         $kids = $this->kid->where('reservation_id', $reservation->id)->get();
         $id = $reservation->id;
 
-        return view('reservations\christmas\kids\show')
+        return view('reservations.christmas.kids.show')
             ->with('kids', $kids)
             ->with('id', $id);
     }
@@ -597,7 +597,7 @@ class ReservationController extends Controller
         $jan_max = $jan_section->max;
         
 
-        return view('reservations\newyear\index')
+        return view('reservations.newyear.index')
             ->with('dec_total', $dec_total)
             ->with('jan_total', $jan_total)
             ->with('dec_max', $dec_max)
@@ -630,7 +630,7 @@ class ReservationController extends Controller
         ->latest()
         ->get();
 
-        return view('reservations\newyear\show', ['type' => $type])
+        return view('reservations.newyear.show', ['type' => $type])
             ->with('dec_total', $dec_total)
             ->with('jan_total', $jan_total)
             ->with('dec_max', $dec_max)
@@ -654,7 +654,7 @@ class ReservationController extends Controller
             $time = $this->time->where('rsv_section_id', $jan->id)->orderBy('time')->get();
         }
 
-        return view('reservations\newyear\create', ['type' => $type])->with('time', $time);
+        return view('reservations.newyear.create', ['type' => $type])->with('time', $time);
     }
 
     public function storeNewYear(Request $request, $type) {
@@ -726,7 +726,7 @@ class ReservationController extends Controller
             $time = $this->time->where('rsv_section_id', 5)->orderBy('time')->get();
         }
 
-        return view('reservations\newyear\edit', ['type' => $type])
+        return view('reservations.newyear.edit', ['type' => $type])
             ->with('reservation', $reservation)
             ->with('type', $type)
             ->with('time', $time);
@@ -778,7 +778,7 @@ class ReservationController extends Controller
             return redirect()->route('rsv.newyear.show', ['type' => $type]);
         }
 
-        return view('reservations\newyear\delete')
+        return view('reservations.newyear.delete')
             ->with('reservation', $reservation)
             ->with('type', $type);
     }
@@ -798,7 +798,7 @@ class ReservationController extends Controller
         $kids = $this->kid->where('reservation_id', $reservation->id)->get();
         $id = $reservation->id;
 
-        return view('reservations\newyear\kids\show')
+        return view('reservations.newyear.kids.show')
             ->with('kids', $kids)
             ->with('id', $id)
             ->with('type', $type);
@@ -814,13 +814,13 @@ class ReservationController extends Controller
             $reservations = $this->reservation->where('rsv_section_id', $jan->id)->where('status', 2)->get();
         }
 
-        return view('reservations\newyear\history')
+        return view('reservations.newyear.history')
             ->with('reservations', $reservations)
             ->with('type', $type);
     }
 
     public function allDeleteNewYear($type) {
-        return view('reservations\newyear\reset')->with('type', $type);
+        return view('reservations.newyear.reset')->with('type', $type);
     }
 
     public function resetNewYear($type) {

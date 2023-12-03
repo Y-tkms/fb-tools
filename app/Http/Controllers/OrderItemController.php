@@ -26,7 +26,7 @@ class OrderItemController extends Controller
             return redirect()->route('index');
         }
 
-        return view('reservations\setting\order-item\index')
+        return view('reservations.setting.order-item.index')
             ->with('sections', $sections)
             ->with('items', $items);
     }

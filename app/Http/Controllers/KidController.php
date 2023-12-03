@@ -32,7 +32,7 @@ class KidController extends Controller
             return redirect()->route('rsv.christmas.index');
         }
 
-        return view('reservations\christmas\kids\edit')->with('kid', $kid);
+        return view('reservations.christmas.kids.edit')->with('kid', $kid);
     }
 
     public function updateXmas(Request $request, $id) {
@@ -71,7 +71,7 @@ class KidController extends Controller
             return redirect()->route('rsv.newyear.show', ['type' => $type]);
         }
 
-        return view('reservations\newyear\kids\edit')
+        return view('reservations.newyear.kids.edit')
             ->with('kid', $kid)
             ->with('type', $type);
     }

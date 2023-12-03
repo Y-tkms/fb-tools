@@ -21,7 +21,7 @@ class ArrItemController extends Controller
             return redirect()->route('index');
         }
 
-        return view('reservations\setting\arrengements\index')->with('items', $items);
+        return view('reservations.setting.arrengements.index')->with('items', $items);
     }
 
     public function store(Request $request) {
@@ -38,7 +38,7 @@ class ArrItemController extends Controller
     public function edit($id) {
         $item = $this->arr_item->findOrFail($id);
 
-        return view('reservations\setting\arrengements\edit')->with('item', $item);
+        return view('reservations.setting.arrengements.edit')->with('item', $item);
     }
 
     public function update(Request $request, $id) {
@@ -56,7 +56,7 @@ class ArrItemController extends Controller
     public function delete($id) {
         $item = $this->arr_item->findOrFail($id);
 
-        return view('reservations\setting\arrengements\delete')->with('item', $item);
+        return view('reservations.setting.arrengements.delete')->with('item', $item);
     }
 
     public function deactivate($id) {
