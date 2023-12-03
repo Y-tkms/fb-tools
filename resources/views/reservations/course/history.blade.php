@@ -9,7 +9,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <div class="row mt-4">
-                        <div class="col-md-6 mb-3"><h3>- Histry -</h3></div>
+                        <div class="col-md-6 mb-3"><h3>- History -</h3></div>
                         <div class="col-md-6 mb-3"><a href="{{route('rsv.course.index')}}" class="btn btn-outline-secondary w-100">Back to today's reservation</a></div>
                     </div>
                     @if(count($reservations) > 0)

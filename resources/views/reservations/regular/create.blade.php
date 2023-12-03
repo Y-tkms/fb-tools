@@ -33,7 +33,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="date" class="form-label">Date</label>
+                                <label for="date" class="form-label">Date <i class="text-danger">*required</i></label>
                                 <input type="date" name="date" id="date" class="form-control" value="{{old('date')}}">
                                 @error('date')
                                     <p class="text-danger small">{{$message}}</p>

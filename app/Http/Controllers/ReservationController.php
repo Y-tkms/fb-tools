@@ -191,7 +191,7 @@ class ReservationController extends Controller
         $request->validate([
             'name' => 'required|min:1|max:50',
             'room_num' => 'nullable|numeric|min:1000|max:9999',
-            'date' => 'nullable|date|after_or_equal:today',
+            'date' => 'required|date|after_or_equal:today',
             'time' => 'nullable',
             'total' => 'nullable|numeric|min:1|max:50',
             'child' => 'nullable|numeric|min:0|max:' . $request->total
@@ -249,7 +249,7 @@ class ReservationController extends Controller
         $request->validate([
             'name' => 'required|min:1|max:50',
             'room_num' => 'nullable|numeric|min:1000|max:9999',
-            'date' => 'nullable|date|after_or_equal:today',
+            'date' => 'required|date|after_or_equal:today',
             'time' => 'nullable',
             'total' => 'nullable|numeric|min:1|max:50',
         ]);

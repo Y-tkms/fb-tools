@@ -15,6 +15,7 @@ use App\Http\Controllers\KidController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RsvSectionController;
+use App\Http\Controllers\UserController;
 use App\Models\Arrangement;
 
 /*
@@ -33,6 +34,12 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
     // index
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    // user
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+    Route::patch('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
     // reservattion regular
     Route::get('/reservation/regular', [ReservationController::class, 'indexRegular'])->name('rsv.regular.index');
     Route::get('/reservation/regular/create', [ReservationController::class, 'createRegular'])->name('rsv.regular.create');
