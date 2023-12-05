@@ -29,82 +29,84 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        @auth
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Reservation
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('rsv.regular.index')}}">Regular</a>
-                                    <a class="dropdown-item" href="{{route('rsv.arrangement.index')}}">Arrengement</a>
-                                    <a class="dropdown-item" href="{{route('rsv.course.index')}}">Course</a>
-                                    <a class="dropdown-item" href="{{route('rsv.xmas.index')}}">Christmas</a>
-                                    <a class="dropdown-item" href="{{route('rsv.newyear.index')}}">New Year</a>
-                                    @if(Auth::user()->role == 'a' || Auth::user()->role == 'emr' || Auth::user()->role == 'er')
-                                        <a class="dropdown-item text-danger" href="{{route('rsv.set.index')}}">Setting</a>
-                                    @endif
-                                </div>
-                            </li>
-                            @if(Auth::user()->role == 'a')
+                @auth
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav me-auto">
+                            
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        Menu
+                                        Reservation
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{route('menu.index')}}">Menu</a>
-                                        <a class="dropdown-item" href="{{route('menu.section')}}">Section & Preference</a>
-                                        <a class="dropdown-item text-danger" href="{{route('menu.hidden')}}">Inactive Menu List</a>
+                                        <a class="dropdown-item" href="{{route('rsv.regular.index')}}">Regular</a>
+                                        <a class="dropdown-item" href="{{route('rsv.arrangement.index')}}">Arrengement</a>
+                                        <a class="dropdown-item" href="{{route('rsv.course.index')}}">Course</a>
+                                        <a class="dropdown-item" href="{{route('rsv.xmas.index')}}">Christmas</a>
+                                        <a class="dropdown-item" href="{{route('rsv.newyear.index')}}">New Year</a>
+                                        @if(Auth::user()->role == 'a' || Auth::user()->role == 'emr' || Auth::user()->role == 'er')
+                                            <a class="dropdown-item text-danger" href="{{route('rsv.set.index')}}">Setting</a>
+                                        @endif
                                     </div>
                                 </li>
-                            @else
-                                <a href="{{route('menu.index')}}" class="nav-link">Menu</a>
-                            @endif
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Other
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('other.calculator')}}">Price Calculator</a>
-                                    <a class="dropdown-item" href="{{route('other.offline')}}">for Offline</a>
-                                </div>
-                            </li>
-                        @endauth
-                    </ul>
+                                @if(Auth::user()->role == 'a')
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            Menu
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{{route('menu.index')}}">Menu</a>
+                                            <a class="dropdown-item" href="{{route('menu.section')}}">Section & Preference</a>
+                                            <a class="dropdown-item text-danger" href="{{route('menu.hidden')}}">Inactive Menu List</a>
+                                        </div>
+                                    </li>
+                                @else
+                                    <a href="{{route('menu.index')}}" class="nav-link">Menu</a>
+                                @endif
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Other
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{route('other.calculator')}}">Price Calculator</a>
+                                        <a class="dropdown-item" href="{{route('other.offline')}}">for Offline</a>
+                                    </div>
+                                </li>
+                            
+                        </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @auth
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if(Auth::user()->role == "a")
-                                        <a class="dropdown-item text-danger" href="{{route('user.index')}}">Admin</a>
-                                    @endif
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ms-auto">
+                            <!-- Authentication Links -->
+                            @auth
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endauth
-                    </ul>
-                </div>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        @if(Auth::user()->role == "a")
+                                            <a class="dropdown-item text-danger" href="{{route('user.index')}}">Admin</a>
+                                        @endif
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endauth
+                        </ul>
+                    </div>
+                @endauth
             </div>
         </nav>
 
