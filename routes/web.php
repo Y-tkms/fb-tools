@@ -120,7 +120,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::patch('/reservation/setting/date/update/{id}', [DateController::class, 'update'])->name('rsv.set.date.update');
     // rsv setting time of 12/31 & 1/1
     Route::get('/reservation/setting/time', [TimeController::class, 'index'])->name('rsv.set.time.index');
+    Route::get('/reservation/setting/time/edit/{id}', [TimeController::class, 'edit'])->name('rsv.set.time.edit');
     Route::post('/reservation/setting/time/store', [TimeController::class, 'store'])->name('rsv.set.time.store');
+    Route::patch('/reservation/setting/time/update/{id}', [TimeController::class, 'update'])->name('rsv.set.time.update');
+    Route::delete('/reservation/setting/time/destroy/{id}', [TimeController::class, 'destroy'])->name('rsv.set.time.destroy');
     // rsv setting special item
     Route::get('/reservation/setting/menu', [OrderItemController::class, 'index'])->name('rsv.set.menu.index');
     Route::post('/reservation/setting/menu/store', [OrderItemController::class, 'store'])->name('rsv.set.menu.store');

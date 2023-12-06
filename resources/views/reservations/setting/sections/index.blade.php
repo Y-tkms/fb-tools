@@ -5,7 +5,8 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="{{route('rsv.set.sec.store')}}" method="POST">
+            <h3>Reservation Section</h3>
+            {{-- <form action="{{route('rsv.set.sec.store')}}" method="POST">
                 @csrf
                 <div class="card">
                     <div class="card-header">
@@ -30,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </form> --}}
             @if(count($all_sections) > 0)
                 <div class="table-responsive mt-4">
                     <table class="table align-middle table-hover">

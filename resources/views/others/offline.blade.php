@@ -71,7 +71,7 @@
                                         <div class="col-md-3 mb-2">
                                             <div class="row">
                                                 <div class="col-md-4 pe-0">
-                                                    <label for="price" class="form-label">Menu Price</label>
+                                                    <label for="price" class="form-label">Price</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <i class="text-danger small">*include Tax & SVC</i>

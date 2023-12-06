@@ -12,7 +12,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-6"><h3>Edit User</h3></div>
-                                <div class="col-6 text-end"><a href="#" class="btn btn-secondary">Cancel</a></div>
+                                <div class="col-6 text-end"><a href="{{route('user.index')}}" class="btn btn-secondary">Cancel</a></div>
                             </div>
                         </div>
                         <div class="card-body">

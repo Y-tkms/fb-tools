@@ -42,13 +42,21 @@
                         <table class="table align-middle table-hover text-center">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>December 31st</th>
+                                    <th colspan="2">December 31st</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($dec as $time)
                                     <tr>
                                         <td class="fw-bold">{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}</td>
+                                        <td>
+                                            <a href="{{route('rsv.set.time.edit', $time->id)}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <form action="{{route('rsv.set.time.destroy', $time->id)}}" class="d-inline" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -60,13 +68,21 @@
                         <table class="table align-middle table-hover text-center">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>January 1st</th>
+                                    <th colspan="2">January 1st</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($jan as $time)
                                     <tr>
                                         <td class="fw-bold">{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}</td>
+                                        <td>
+                                            <a href="{{route('rsv.set.time.edit', $time->id)}}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <form action="{{route('rsv.set.time.destroy', $time->id)}}" class="d-inline" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

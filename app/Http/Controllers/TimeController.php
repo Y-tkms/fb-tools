@@ -46,4 +46,28 @@ class TimeController extends Controller
 
         return redirect()->back();
     }
+
+    public function edit($id) {
+        $time = $this->time->findOrFail($id);
+
+        return view('reservations.setting.time.edit')->with('time', $time);
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'time' => 'required'
+        ]);
+
+        $time = $this->time->findOrFail($id);
+        $time->time = $request->time;
+        $time->save();
+
+        return redirect()->route('rsv.set.time.index');
+    }
+
+    public function destroy($id) {
+        $this->time->destroy($id);
+
+        return redirect()->back();
+    }
 }

@@ -16,9 +16,9 @@
                     <a href="{{route('rsv.set.arr.index')}}" class="btn btn-outline-primary w-100"><h1 class="py-3">Arrengement Item</h1></a>
                 </div>
                 @if(Auth::user()->role == "a")
-                    <div class="col-md-6 mb-4">
+                    {{-- <div class="col-md-6 mb-4">
                         <a href="{{route('rsv.set.menu.index')}}" class="btn btn-outline-primary w-100"><h1 class="py-3">Menu for RSV</h1></a>
-                    </div>
+                    </div> --}}
                     <div class="col-md-6 mb-4">
                         <a href="{{route('rsv.set.time.index')}}" class="btn btn-outline-primary w-100"><h1 class="py-3">Time of 12/31 & 1/1</h1></a>
                     </div>
