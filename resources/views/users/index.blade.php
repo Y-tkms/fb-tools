@@ -7,7 +7,7 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-6"><h1><i class="fa-solid fa-users"></i> Admin</h1></div>
-                <div class="col-6 text-end"><a href="{{ route('register') }}" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Create User</a></div>
+                {{-- <div class="col-6 text-end"><a href="{{ route('register') }}" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Create User</a></div> --}}
             </div>
             <div class="table-responsive">
                 <table class="table align-middle table-hover text-center">
