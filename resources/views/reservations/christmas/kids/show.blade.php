@@ -25,7 +25,7 @@
                         <hr>
                     @endif
                 @endforeach
-                <a href="{{route('rsv.xmas.edit', $id)}}" class="btn btn-secondary w-100">Back/a>
+                <a href="{{route('rsv.xmas.edit', $id)}}" class="btn btn-secondary w-100">Back</a>
             </div>
             @if(Auth::user()->role == 'a' || Auth::user()->role == 'er' || Auth::user()->role == 'emr')
                 <div class="card-footer">
