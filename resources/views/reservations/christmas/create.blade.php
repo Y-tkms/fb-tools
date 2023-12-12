@@ -77,7 +77,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="total" class="form-label">Total number of guest (include child)</label>
+                                <label for="total" class="form-label">Total guests (include child)</label>
                                 <input type="number" name="total" id="total" class="form-control" value="{{old('total')}}" placeholder="Total">
                                 @error('total')
                                     <p class="text-danger small">{{$message}}</p>

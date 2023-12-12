@@ -40,7 +40,7 @@
                 @foreach($menu_no_section as $menu)
                     @if($menu->status == 1)
                         <div class="col-md-3">
-                            <a href="{{route('menu.show', $menu->id)}}" class="btn btn-outline-dark w-100">{{$menu->name}}</a>
+                            <a href="{{route('menu.show', $menu->id)}}" class="btn btn-outline-dark w-100 fw-bold text-truncate">{{$menu->name}}</a>
                         </div>
                     @endif
                 @endforeach

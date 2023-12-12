@@ -42,7 +42,9 @@
                                                             @else
                                                                 <p class="mb-0">PPL: {{$reservation->people_number}}</p>
                                                             @endif
-                                                            <p class="mb-0">Dish: {{$reservation->order->dish}}</p>
+                                                            @if($reservation->order)
+                                                                <p class="mb-0">Dish: {{$reservation->order->dish}}</p>
+                                                            @endif
                                                         </div>
                                                         <div class="col-md-8">
                                                             <p class="mb-0">Note:</p>
