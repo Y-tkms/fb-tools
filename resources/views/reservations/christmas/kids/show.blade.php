@@ -8,8 +8,8 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-6"><h3 class="mb-0">Children</h3></div>
-                    <div class="col-md-6 text-end"><h3 class="mb-0">- for Christmas -</h3></div>
+                    <div class="col-md-4"><h3 class="mb-0">Children</h3></div>
+                    <div class="col-md-8 text-end"><h3 class="mb-0">- for Christmas -</h3></div>
                 </div>
             </div>
             <div class="card-body">

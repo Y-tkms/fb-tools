@@ -76,7 +76,11 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="dish" class="form-label">Number of dish <i class="text-danger">*required</i></label>
-                                <input type="number" name="dish" id="dish" class="form-control" value="{{old('dish', $reservation->order->dish)}}" placeholder="Dish">
+                                @if($reservation->order)
+                                    <input type="number" name="dish" id="dish" class="form-control" value="{{old('dish', $reservation->order->dish)}}" placeholder="Dish">
+                                @else
+                                    <input type="number" name="dish" id="dish" class="form-control" value="{{old('dish')}}" placeholder="Dish">
+                                @endif
                                 @error('dish')
                                     <p class="text-danger small">{{$message}}</p>
                                 @enderror
